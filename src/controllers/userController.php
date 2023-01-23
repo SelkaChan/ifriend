@@ -10,18 +10,15 @@ class userController {
   public function index() {
     //Obtener los datos del modelo;
     $users = User::all();
-    echo "<h1>Listado de usuarios</h1>";
-    foreach ($users as $user) {
-      echo "<p> $user->name </p>";
-    }
+    global $blade;
+    echo $blade->view()->make('list', compact('users'))->render();
 
   }
  
-  // Show the form for creating a new resource.
-  public function create() {}
- 
   // Store a newly created resource in storage.
   public function store() {
+    echo "Almacenando...";
+    var_dump($_POST);
   }
  
   // Display the specified resource.
@@ -29,9 +26,8 @@ class userController {
     $id = $param['id'];
     $user= User::find($id);
     if ($user) {
-      echo "<h1>Listado de usuarios</h1>";
-      echo "El id es $id";
-      echo "<p> $user->name </p>";
+      global $blade;
+      echo $blade->view()->make('show', compact('user'))->render();
     }else{
       echo "<h2>Usuario no encontrado</h2>";
     }

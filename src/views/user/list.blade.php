@@ -3,7 +3,7 @@
 @section('title','Listado de usuarios')
 
 @section('contenido')
-  <a href="/user/create" class="btn btn-success mb-3 mt-3">Crear usuarios</a>
+  <a href="/user/create" class="btn btn-outline-warning mb-3 mt-3">Crear usuarios</a>
   <table class="table">
     <thead>
       <tr>
@@ -20,7 +20,7 @@
         <td>{{$user->name}}</td>
         <td>{{$user->password}}</td>
         <td>
-          <a href="/user/{{$user->id}}" class="btn btn-success">Mostrar</a>
+          <a href="/user/{{$user->id}}" class="btn btn-outline-info">Mostrar</a>
         </td>
       </tr>
       @endforeach

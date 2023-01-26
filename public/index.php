@@ -40,6 +40,10 @@ $router->map('GET', '/party', 'partyController#index');
 $router->map('GET', '/party/[i:id]', 'partyController#show');
 $router->map('GET', '/party/create', 'partyController#create');
 $router->map('POST', '/party', 'partyController#store');
+$router->map('GET', '/party/[i:id]/edit', 'partyController#edit');
+$router->map('PUT', '/party/[i:id]', 'partyController#update');
+$router->map('DELETE', '/party/[i:id]', 'partyController#destroy');
+
 
 
 

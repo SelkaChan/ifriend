@@ -24,8 +24,40 @@ class partyController {
         global $blade;
         echo $blade->view()->make('party.show', compact('party','assignment','users'))->render();
       }else{
-        echo "<h2>Usuario no encontrado</h2>";
+        echo "<h2>Usuario/asignación no encontrados</h2>";
       }
+    }
+
+    public function edit($param) {
+      $id = $param['id'];
+      $party= Party::find($id);
+      $users = User::all();
+      //falta añadir los usuarios que ya estan en esa partida para marcarlos
+
+      global $blade;
+      echo $blade->view()->make('party.edit', compact('party','users'))->render();
+    }
+
+
+    //cambiar por el update de parties
+
+    public function update($param) {
+      $id = $param['id'];
+      $party= Party::find($id);
+      $party->name = $_POST['name'];
+      $party->save();
+
+      $assignment = Assignment::where('party_id',$id)->delete();
+      $participants = $_POST['participants'];
+      shuffle($participants);
+      for ($i=0; $i < count($participants); $i++) { 
+        $assignment = new Assignment;
+        $assignment->party_id = $party->id;
+        $assignment->user_from = $participants[$i];
+        $assignment->user_to = $participants[($i+1) % count($participants)];
+        $assignment->save();
+      }
+      header('Location: /party');
     }
 
     public function create(){
@@ -49,6 +81,15 @@ class partyController {
         $assignment->user_to = $participants[($i+1) % count($participants)];
         $assignment->save();
       }
+      header('Location: /party');
+    }
+
+    public function destroy($param) {
+      $id = $param['id'];
+      $party=Party::find($id);
+      $assignment = Assignment::where('party_id',$id)->delete();
+      $party->delete();
+  
       header('Location: /party');
     }
 }

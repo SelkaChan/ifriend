@@ -15,6 +15,19 @@ class partyController {
       echo $blade->view()->make('party.list', compact('parties'))->render();
     }
 
+    public function show($param) {
+      $id = $param['id'];
+      $party= Party::find($id);
+      $users= User::all();
+      $assignment = Assignment::where('party_id',$id)->get();
+      if ($party && $assignment) {
+        global $blade;
+        echo $blade->view()->make('party.show', compact('party','assignment','users'))->render();
+      }else{
+        echo "<h2>Usuario no encontrado</h2>";
+      }
+    }
+
     public function create(){
       $users = User::all();
       global $blade;

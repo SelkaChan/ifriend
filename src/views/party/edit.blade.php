@@ -12,12 +12,17 @@
     </div>
     <div class="mb-3">
       <h3>Participantes</h3>
-      @foreach ($users as $user)
-      <span class="m-2">
-        <input type="checkbox" name="participants[]" id="user{{$user->id}}" value="{{$user->id}}">
-        <label for="user{{$user->id}}">{{$user->name}}</label>
-      </span>
-      @endforeach
+        @foreach ($users as $user)
+        <br>
+        <span class="m-2">
+          <input type="checkbox" name="participants[]" id="user{{$user->id}}" value="{{$user->id}}"
+          @if (str_contains($assignment, $user->id))
+              {{ "checked" }}
+          @endif>
+          <label for="user{{$user->id}}">{{$user->name}}</label>
+        </span>
+        @endforeach
+
     </div>
     <button type="submit" class="btn btn-primary">Modificar</button>
   </form>

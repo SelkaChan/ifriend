@@ -32,10 +32,11 @@ class partyController {
       $id = $param['id'];
       $party= Party::find($id);
       $users = User::all();
+      $assignment = Assignment::where('party_id',$id)->pluck('user_from');
       //falta añadir los usuarios que ya estan en esa partida para marcarlos
 
       global $blade;
-      echo $blade->view()->make('party.edit', compact('party','users'))->render();
+      echo $blade->view()->make('party.edit', compact('party','users','assignment'))->render();
     }
 
 

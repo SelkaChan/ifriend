@@ -10,12 +10,11 @@
       <label for="exampleInputEmail1" class="form-label">Nombre</label>
       <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name" value="{{$party->name}}">
     </div>
-    <div class="mb-3">
-      <h3>Participantes</h3>
+    <h3>Participantes</h3>
+    <div class="mb-3 input-group">
         @foreach ($users as $user)
-        <br>
         <span class="m-2">
-          <input type="checkbox" name="participants[]" id="user{{$user->id}}" value="{{$user->id}}"
+          <input type="checkbox" class="form-check-input" name="participants[]" id="user{{$user->id}}" value="{{$user->id}}"
           @if (str_contains($assignment, $user->id))
               {{ "checked" }}
           @endif>
